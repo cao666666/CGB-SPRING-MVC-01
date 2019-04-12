@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>CGB-SPRING-MVC-01</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>CGB-SPRING-MVC-01</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- 定义spring mvc前端控制器 -->
+	<servlet>
+		<servlet-name>frontController</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 定义初始化参数 -->
+		<init-param>
+			<!-- 这个参数是DispatcherServlet父类中的一个属性 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-configs.xml</param-value>
+		</init-param>
+		<!-- 定义servlet初始化的时间点(web服务器启动时) -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- 定义servlet的映射 -->
+	<servlet-mapping>
+		<servlet-name>frontController</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 </web-app>

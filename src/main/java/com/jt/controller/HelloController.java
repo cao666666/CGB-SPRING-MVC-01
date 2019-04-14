@@ -1,12 +1,23 @@
 package com.jt.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller//表示这是一个bean对象，由spring管理
 @RequestMapping("/")
 public class HelloController {
+	@RequestMapping("doSayHelloUI")
+	public String doSayHelloUI(){
+		return "hello";//view
+	}
+	@RequestMapping("doSayWelcome")
+	public String doSayWelcome(ModelMap model){
+		model.addAttribute("msg", "welcome to cgb");
+		return "hello";
+	}
 	/**
 	 * @ReauestMapping注解用于定义请求映射
 	 * @return ModelAndView为spring mvc中提供的一个

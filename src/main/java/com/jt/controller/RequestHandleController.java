@@ -1,7 +1,12 @@
 package com.jt.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.DoubleToLongFunction;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +26,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class RequestHandleController {
 	//===========请求资源路径映射========
+	
+	
+	@RequestMapping("doUser")
+	@ResponseBody
+	public SysLog doLog(){
+		SysLog log=new SysLog();
+		log.setId(100);
+		log.setUsername("ccc");
+		log.setIp("192.168.1.12");
+		return log;
+	}
+	
+	@RequestMapping("doResponseJsonString")
+	@ResponseBody
+	public String doResponseJsonString(){
+		return "{\"id\":10,\"name\":\"A\"}";//{"id":10,"name":"A"}
+	}
+	
+	@RequestMapping("doMapJsonString")
+	@ResponseBody
+	public List<Map<String, Object>> doMapJsonString(){
+		List<Map<String, Object>> list=new ArrayList<>();
+		Map<String, Object> map=new HashMap<>();
+		map.put("id", 100);
+		map.put("name", "hello");
+		list.add(map);
+		return list;//系统底层会基于返回值查找对应的转换
+		//将对应转换为指定格式的字符串
+	}
+	
+	
 	//多个路径映射同一个资源
 	@RequestMapping(value={"doRequestURL01","doReqURL01"})
 	@ResponseBody

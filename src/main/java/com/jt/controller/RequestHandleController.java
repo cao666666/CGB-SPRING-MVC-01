@@ -1,14 +1,23 @@
 package com.jt.controller;
 
+import java.util.Arrays;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 @RequestMapping("/reg/")
 @Controller
 public class RequestHandleController {
@@ -62,7 +71,46 @@ public class RequestHandleController {
 	
 	@GetMapping("doRequestParam02")
 	@ResponseBody
-	public String doRequestParam02(Integer page){
-		return "obtain's value is"+page;
+	public String doRequestParam02(@RequestParam("page") Integer pageCurrent){
+		return "obtain's value is"+pageCurrent;
 	}//integer 参数对象由spring mvc创建,由mvc将请求参数值注入给方法参数
+
+	@GetMapping("doRequestParam03")
+	@ResponseBody
+	public String doRequestParam03(@DateTimeFormat(pattern="yyyy-MM-dd")Date startDate){
+		return "obtain's value is:"+startDate;
+	}
+	@GetMapping("doRequestParam04")
+	@ResponseBody
+	public String doRequestParam04(Integer[] ids,HttpServletRequest request){
+		String is=request.getParameter("ids");
+		System.out.println(is);
+		return "obtain's value is"+Arrays.toString(ids);
+	}
+	
+	
+	@GetMapping("doRequestParam05")
+	@ResponseBody
+	public String doRequestParam05(Integer... ids){
+		return "obtain's value is:"+Arrays.toString(ids);
+	}
+	
+	@GetMapping("doRequestParam07")
+	@ResponseBody
+	public String doRequestParam06(SysLog entity){
+		return "obtain's value is"+entity.getUsername();
+	}
+	
+	@RequestMapping(value="header",method=RequestMethod.GET)
+	@ResponseBody
+	public String withHeader(@RequestHeader("Accept-Encoding") String acceptencoding){
+		return "Obtained 'Accept header':"+acceptencoding;
+	}
+	
+	@GetMapping("doRequestParam06")
+	@ResponseBody
+	public String withCooke(@CookieValue String JSESSIONID){
+		return "Obtained COOKIE value:"+JSESSIONID;
+	}
+	
 }

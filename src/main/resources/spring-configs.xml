@@ -24,7 +24,18 @@
 	<!-- 例如：@Controller,@Service,... -->
 	<context:component-scan base-package="com.jt"></context:component-scan>
 	<!-- 启用spring mvc 默认配置 -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven>
+	<!-- 配置fastjson为默认的json转换器 -->
+		<mvc:message-converters register-defaults="true">
+			<bean  name="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="SupportedMediaTypes">
+					<list>
+						<value>application/json;charset=utf-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	<!-- 配置视图解析器(viewresource) 
 	例如：现有一视图名hello，解析后：/WEB-INF/pages//hello.jsp-->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

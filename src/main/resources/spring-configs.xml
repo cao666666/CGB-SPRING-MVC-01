@@ -31,6 +31,7 @@
 				<property name="supportedMediaTypes">
 					<list>
 						<value>application/json;charset=utf-8</value>
+						<value>text/html;charset=utf-8</value>
 					</list>
 				</property>
 			</bean>
@@ -42,6 +43,16 @@
 		<property name="Prefix" value="/WEB-INF/pages/"></property>
 		<property name="Suffix" value=".jsp"></property>
 	</bean>
+	
+	<!-- 拦截器的配置 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+		<!-- 配置拦截器要拦截的请求 -->
+			<mvc:mapping path="/**"/>
+			<!-- 定义具体拦截器 -->	
+			<bean class="com.jt.interceptor.TimeInterceptor"></bean>	
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
 
 

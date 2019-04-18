@@ -3,6 +3,7 @@ package com.jt.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 /**
@@ -35,6 +36,13 @@ public class TimeInterceptor implements HandlerInterceptor {
 		long startTime=(Long) request.getAttribute("startTime");
 		System.out.println(startTime);
 		System.out.println(endTime-startTime);
+		//需求变更:要求输出哪个对象的哪个方法的总时长
+		System.out.println(handler.getClass().getName());
+		HandlerMethod hMethod=(HandlerMethod) handler;
+		String beanName=hMethod.getBeanType().getName();
+		String methodName=hMethod.getMethod().getName();
+		System.out.println(beanName+"."+methodName+"总时长:"+(endTime-startTime));
+		
 		
 	}
 

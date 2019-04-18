@@ -52,6 +52,13 @@
 			<!-- 定义具体拦截器 -->	
 			<bean class="com.jt.interceptor.TimeInterceptor"></bean>	
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+		<!-- 配置拦截器要拦截的请求 -->
+			<mvc:mapping path="/**"/>
+			<!-- 定义具体拦截器 -->	
+			<bean class="com.jt.interceptor.MonitorInterceptor"></bean>	
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
 

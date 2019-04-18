@@ -27,7 +27,7 @@
 	<mvc:annotation-driven>
 	<!-- 配置fastjson为默认的json转换器 -->
 		<mvc:message-converters register-defaults="true">
-			<bean  name="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+			<bean  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
 				<property name="supportedMediaTypes">
 					<list>
 						<value>application/json;charset=utf-8</value>

@@ -33,7 +33,7 @@ public class MonitorInterceptor extends HandlerInterceptorAdapter{
 		Method targetMethod=hm.getMethod();
 		boolean flag=
 		targetMethod.isAnnotationPresent(TimeMonitor.class);
-		if(!flag)return true;
+		if(!flag)return true;//没有注解，直接放行
 		
 		//1.获取当前时间
 		long time=System.currentTimeMillis();
